@@ -1,11 +1,9 @@
 import { createBrowserRouter , Navigate, RouterProvider ,  } from "react-router-dom"
 
 import React, { useEffect } from 'react';
-
-import Error from "./page";
 import { SingleProduct } from "./components"
 
-import {Home , Speakers , Headphones , Earphones,  HeadphonesII, HeadphonesIII, SpeakersI, SpeakersII, HeadphonesI, EarphonesI  } from './page'
+import {Home , Speakers , Headphones , Earphones,  HeadphonesII, HeadphonesIII, SpeakersI, SpeakersII, HeadphonesI, EarphonesI, Error  } from './page'
 import MainLayout from "./layout/MainLayout"
 
 
