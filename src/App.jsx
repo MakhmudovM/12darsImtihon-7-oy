@@ -1,6 +1,7 @@
 import { createBrowserRouter , Navigate, RouterProvider ,  } from "react-router-dom"
 
 
+
 import { SingleProduct } from "./components"
 
 import {Home , Speakers , Headphones , Earphones,  HeadphonesII, HeadphonesIII, SpeakersI, SpeakersII, HeadphonesI, EarphonesI  } from './page'
@@ -8,6 +9,9 @@ import MainLayout from "./layout/MainLayout"
 
 
 function App() {
+
+  
+  
 
   const routes = createBrowserRouter([
     {

@@ -1,15 +1,50 @@
 
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 
 
 import bestImg from '../assets/shared/desktop/image-best-gear.jpg'
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import data from '../data/db.json'
 
 
 
 
 
 function SingleProduct() {
+  const { slug } = useParams();
+  const [productData, setProductData] = useState(null);
+  const [cartNum, setCartNum] = useState(1);
+  const dispatch = useDispatch();
+  const cartDecreaseHandler = () => {
+    if (cartNum > 1) {
+      setCartNum(cartNum - 1);
+    }
+  };
+  
+
+  const cartIncreaseHandler = () => {
+    setCartNum(cartNum + 1);
+  };
+
+  const addToCartHandler = () => {
+    const cartProduct = {
+      id: productData.id,
+      price: productData.price,
+      quantity: cartNum,
+      totalPrice: productData.price,
+      name: productData.name,
+      image: productData.image,
+    };
+    dispatch(addItemToCart(cartProduct));
+  };
+
+  useEffect(() => {
+    const matchedProduct = data.find((product) => product.slug === slug);
+    setProductData(matchedProduct);
+  }, [slug]);
   return (
     <div>
         <div className='contain mt-20 mb-14'>
@@ -28,9 +63,9 @@ function SingleProduct() {
                 <span className='font-bold text-lg leading-6 tracking-[1.3px]'>$ 599</span>
 
                 <div className='flex gap-6 mt-12 items-center'>
-                    <button className=' p-2 rounded-md  btn-ghost'>-</button>
-                    <span className=' p-2 rounded-md  btn-ghost'>1</span>
-                    <button className=' p-2 rounded-md  btn-ghost'>+</button>
+                    <button className=' p-2 rounded-md  btn-ghost' onClick={cartDecreaseHandler}>-</button>
+                    <span className=' p-2 rounded-md  btn-ghost'>{cartNum}</span>
+                    <button className=' p-2 rounded-md  btn-ghost' onClick={cartIncreaseHandler}>+</button>
                     <div><button className=' bg-orange-500 py-4 px-8 text-white font-bold'>ADD TO CART</button></div>
                 </div>
             </div>

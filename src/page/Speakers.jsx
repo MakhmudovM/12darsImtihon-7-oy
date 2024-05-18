@@ -5,7 +5,7 @@ import headphones from '../assets/cart/image-xx99-mark-one-headphones.jpg'
 import speaker from '../assets/cart/image-zx9-speaker.jpg'
 import earphones from '../assets/cart/image-yx1-earphones.jpg'
 import bestImg from '../assets/shared/desktop/image-best-gear.jpg'
-import speaker1 from '../assets/shared/desktop/image-zx9-speaker.jpg'
+import speakers1 from '../assets/product-zx9-speaker/desktop/image-category-page-preview.jpg'
 import speaker2 from '../assets/shared/desktop/image-zx7-speaker.jpg'
  
 
@@ -18,7 +18,7 @@ function Speakers() {
 
       <div className='my-[160px] flex items-center justify-center contain gap-32'>
         <div>
-          <img src={speaker1} alt=""  className='w-[540px] h-[560px]'/>
+          <img src={speakers1} alt=""  className='w-[540px] h-[560px]'/>
         </div>
         <div className='w-[445px]'>
           <h3 className='mb-6 tracking-[8px] text-orange-500'>NEW PRODUCT</h3>
