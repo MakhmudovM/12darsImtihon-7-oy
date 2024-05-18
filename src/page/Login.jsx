@@ -1,55 +1,51 @@
-import { Form, Link } from "react-router-dom";
-import { SubmitBtn } from '../components'
- 
-function Login() {
-  return (
-    <div className="h-screen grid place-content-center">
-      <Form
-        method="post"
-        className="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4"
-      >
-        <h4 className="text-center text-3xl font-bold">Login</h4>
-        <div className="form-control">
-          <label className="w-full">
-            <div className="label">
-              <span className="label-text capitalize">Email:</span>
-            </div>
-            <input
-              type='email'
-              name='email'
-              placeholder="Type here"
-              defaultValue="test@gmail.com"
-              className={`input input-bordered w-full`}
-            />
-          </label>
-        </div>
-        <div className="form-control">
-          <label className="w-full">
-            <div className="label">
-              <span className="label-text capitalize">Password:</span>
-            </div>
-            <input
-              type='password'
-              name='password'
-              placeholder="Type here"
-              defaultValue="secret"
-              className={`input input-bordered w-full`}
-            />
-          </label>
-        </div>
-        <div className="mt-4">
-          <SubmitBtn text="Login" />
-        </div>
-        <p className="text-center">
-          Not a member yet ?
-          <Link to="/register" className="capitalize link-primary">
-            {" "}
-            register
-          </Link>
-        </p>
-      </Form>
-    </div>
-  );
+import { useSignUp } from "../hooks/useSignUp"
+import { useEffect } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { Link , Form, useActionData} from "react-router-dom";
+
+import FormInput from "../components/FormInput";
+import useLogin from "../hooks/useLogin";
+
+export const action = async ({request}) => {
+  let formData = await request.formData();
+  let name = formData.get("Name");
+  let email = formData.get("Email");
+  let password = formData.get("Password");
+
+  return  { email , password };
 }
 
-export default Login;
+function Signin() {
+  let userSignin = useActionData();
+
+  const {signinEmailAndPassword} = useLogin()
+
+  useEffect(() => {
+    if (userSignin) {
+      signinEmailAndPassword(userSignin.email , userSignin.password)
+    }
+  } , [userSignin])
+
+  const {signupWithGoogle , user , error} = useSignUp()
+  return (
+    <div className="min-h-screen grid place-items-center">
+   <div className="max-w-96 w-full text-center">
+      <h2 className="font-bold text-4xl mb-10">Signin</h2>
+      
+       <Form method="POST">
+       <FormInput type="email" label="Email:" name="Email"/>
+       <FormInput type="password" label="Password:" name="Password"/>
+   <div>
+    <button className="btn btn-secondary w-full mb-3" type="submit">Submit</button>
+     <button type="button" onClick={signupWithGoogle} className="btn btn-secondary w-full mb-5">
+      <FcGoogle className="text-3xl"/>
+        <span className="text-2xl">Google</span></button>
+        <p><Link className="hover:text-violet-600" to="/signup" >Don't you have an account? Signin</Link></p>
+   </div>
+       </Form>
+   </div>
+  </div>
+  )
+}
+
+export default Signin

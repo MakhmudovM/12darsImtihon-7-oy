@@ -45,6 +45,9 @@ function SingleProduct() {
     const matchedProduct = data.find((product) => product.slug === slug);
     setProductData(matchedProduct);
   }, [slug]);
+
+  
+  
   return (
     <div>
         <div className='contain mt-20 mb-14'>

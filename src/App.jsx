@@ -1,7 +1,8 @@
 import { createBrowserRouter , Navigate, RouterProvider ,  } from "react-router-dom"
 
+import React, { useEffect } from 'react';
 
-
+import Error from "./page";
 import { SingleProduct } from "./components"
 
 import {Home , Speakers , Headphones , Earphones,  HeadphonesII, HeadphonesIII, SpeakersI, SpeakersII, HeadphonesI, EarphonesI  } from './page'
@@ -10,13 +11,13 @@ import MainLayout from "./layout/MainLayout"
 
 function App() {
 
-  
-  
+ 
 
   const routes = createBrowserRouter([
     {
       path:"/",
       element: <MainLayout/>,
+      errorElement: <Error/>,
       children: [
         {
           index: true,
