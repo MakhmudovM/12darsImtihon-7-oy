@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .align-content {
+        @apply mx-auto max-w-[1200px] 
+    }
+}
+@layer components {
+    .contain {
+        @apply mx-auto max-w-[1110px] 
+    }
+}
