@@ -1,13 +1,9 @@
-export { default as Footer} from './Footer'
-export { default as Navbar} from './Navbar'
-export { default as Header} from './Header'
-export { default as SingleProduct} from './SingleProduct'
-export { default as ProtectRoutes } from "./ProtectRoutes"
+export { default as ErrorElement } from "./ErrorElement"
+export { default as Navbar } from "./Navbar"
+export { default as Footer } from "./Footer"
+export { default as FooterElement } from "./FooterElement"
+export { default as Menu } from "./Menu"
+export { default as CartButton } from "./CartButton"
+export { default as Cart } from "./Cart"
 export { default as SubmitBtn } from "./SubmitBtn"
-
-
-
-
-
-
-
+export { default as ProtectedRoutes } from "./ProtectedRoutes"

@@ -1,53 +1,103 @@
-import { useSignUp } from "../hooks/useSignUp"
-import { FcGoogle } from "react-icons/fc";
-import { Link , Form, useActionData} from "react-router-dom";
-
-import FormInput from "../components/FormInput";
+import { Link, Form, useActionData } from "react-router-dom";
+import { useRegister } from "../hooks/useRegister";
 import { useEffect } from "react";
+import { SubmitBtn } from '../components'
 
-
-export const action = async ({request}) => {
+export const action = async ({ request }) => {
   let formData = await request.formData();
-  let name = formData.get("Name");
-  let photo = formData.get("Photo");
-  let email = formData.get("Email");
-  let password = formData.get("Password");
+  let displayName = formData.get("displayName");
+  let photoURL = formData.get("photoURL");
+  let email = formData.get("email");
+  let password = formData.get("password");
 
-  return  { name , photo , email , password };
-}
+  return { displayName, photoURL, email, password };
+};
 
-function Signup() {
-  let userSignup = useActionData();
-
-  const {signupWithGoogle , signupWithEmailAndPassword , user , error} = useSignUp()
+function Register() {
+  const data = useActionData();
+  const { register } = useRegister();
 
   useEffect(() => {
-    if (userSignup) {
-      signupWithEmailAndPassword(userSignup.name, userSignup.photo, userSignup.email , userSignup.password)
+    if (data) {
+      register(data);
     }
-  } , [userSignup])
+  }, [data]);
 
-    return (
-      <div className="min-h-screen grid place-items-center">
-       <div className="max-w-96 w-full text-center">
-       <h2 className="font-bold text-4xl mb-10">Signup</h2>
-       <Form method="POST">
-       <FormInput type="text" label="Name:" name="Name"/>
-       <FormInput type="url" label="PhotoUrl" name="Photo"/>
-       <FormInput type="email" label="Email:" name="Email"/>
-       <FormInput type="password" label="Password:" name="Password"/>
-        <div>
-         <button className="btn btn-secondary w-full mb-3" type="submit">Submit</button>
-          <button type="button" onClick={signupWithGoogle} className="btn btn-secondary w-full mb-5">
-           <FcGoogle className="text-3xl"/>
-            <span className="text-2xl">Google</span></button>
-            <p><Link className="hover:text-violet-600 " to="/signin">Are you already registered? Login</Link></p>
+  return (
+    <div className="h-screen grid place-content-center">
+      <Form
+        method="post"
+        className="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4"
+      >
+        <h4 className="text-center text-3xl font-bold">Register</h4>
+        <div className="form-control">
+          <label className="w-full">
+            <div className="label">
+              <span className="label-text capitalize">User:</span>
+            </div>
+            <input
+              type="text"
+              name="user"
+              placeholder="Type here"
+              defaultValue="User"
+              className={`input input-bordered w-full`}
+            />
+          </label>
         </div>
-       </Form>
-       </div>
-          
-      </div>
-    )
-  }
-  
-export default Signup
+        <div className="form-control">
+          <label className="w-full">
+            <div className="label">
+              <span className="label-text capitalize">Photo URL:</span>
+            </div>
+            <input
+              type='url'
+              name='photoUrl'
+              placeholder="Type here"
+              defaultValue="https://..."
+              className={`input input-bordered w-full`}
+            />
+          </label>
+        </div>
+        <div className="form-control">
+          <label className="w-full">
+            <div className="label">
+              <span className="label-text capitalize">Email:</span>
+            </div>
+            <input
+              type='email'
+              name='email'
+              placeholder="Type here"
+              defaultValue="test@gmail.com"
+              className={`input input-bordered w-full`}
+            />
+          </label>
+        </div>
+        <div className="form-control">
+          <label className="w-full">
+            <div className="label">
+              <span className="label-text capitalize">Password:</span>
+            </div>
+            <input
+              type='password'
+              name='password'
+              placeholder="Type here"
+              defaultValue="secret"
+              className={`input input-bordered w-full`}
+            />
+          </label>
+        </div>
+        <div className="mt-4">
+          <SubmitBtn text="register" />
+        </div>
+        <p className="text-center">
+          Not a member yet ?
+          <Link to="/login" className="capitalize link-primary">
+            login
+          </Link>
+        </p>
+      </Form>
+    </div>
+  );
+}
+
+export default Register;

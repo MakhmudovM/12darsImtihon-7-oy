@@ -1,46 +1,82 @@
-import React from 'react'
-import NavLinks from './Navlinks'
-
-import facebook from '../assets/shared/desktop/icon-facebook.svg'
-import twiter from '../assets/shared/desktop/icon-twitter.svg'
-import instagram from '../assets/shared/desktop/icon-instagram.svg'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import logo from "/assets/shared/desktop/logo.svg";
+import facebook from '/assets/shared/desktop/icon-facebook.svg'
+import twitter from '/assets/shared/desktop/icon-twitter.svg'
+import instagram from '/assets/shared/desktop/icon-instagram.svg'
 
 function Footer() {
   return (
-    <div className='bg-[#191919]'>
-     
-<footer
-  class="flex flex-col  items-center  text-center text-surface text-white  lg:text-left align-content">
-  <div class="container p-6">
-    <div class="grid gap-4 lg:grid-cols-2">
-      <div class="mb-6 md:mb-0">
-        <Link to="/"class="mb-2 text-3xl font-bold">audiophiles</Link>
-
-        <p class="mb-14 text-gray-500">
-        Audiophile is an all in one stop to fulfill your audio needs. We're a small team of music lovers and sound specialists who are devoted to helping you get the most out of personal audio. Come and visit our demo facility - we’re open 7 days a week.
-        </p>
-
-        <p className='text-gray-500 mb-8'>Copyright 2021. All Rights Reserved</p>
-      </div>
-
-      <div class="mb-6 md:mb-1">
-        <ul className='lg:flex gap-6 font-bold items-center justify-end '>
-          <NavLinks/>
-        </ul>
-
-        <div className='flex items-center justify-end mt-28  gap-4'>
-          <a href=""><img src={facebook} alt="" /></a>
-          <a href=""><img src={twiter} alt="" /></a>
-          <a href=""><img src={instagram} alt="" /></a>
+    <div className="bg-black">
+      <hr className="w-[101px] bg-orange-600 h-1 ml-[250px]" />
+      <div className="max-container pt-20 pb-12">
+        <div className="flex items-center justify-between mb-9">
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
+          <nav>
+            <ul className="flex items-center gap-5">
+              <li>
+                <Link
+                  to="/"
+                  className="text-white uppercase font-bold text-xs tracking-widest hover:text-orange-600"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/headphones"
+                  className="text-white uppercase font-bold text-xs tracking-widest hover:text-orange-600"
+                >
+                  Headphones
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/speakers"
+                  className="text-white uppercase font-bold text-xs tracking-widest hover:text-orange-600"
+                >
+                  speakers
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/earphones"
+                  className="text-white uppercase font-bold text-xs tracking-widest hover:text-orange-600"
+                >
+                  earphones
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="flex items-end justify-between mb-14">
+          <p className="w-[540px] text-white opacity-50 text-sm">
+            Audiophile is an all in one stop to fulfill your audio needs. We're
+            a small team of music lovers and sound specialists who are devoted
+            to helping you get the most out of personal audio. Come and visit
+            our demo facility - we’re open 7 days a week.
+          </p>
+          <ul className="flex items-center gap-5">
+            <li>
+              <img src={facebook} alt="" />
+            </li>
+            <li>
+              <img src={twitter} alt="" />
+            </li>
+            <li>
+              <img src={instagram} alt="" />
+            </li>
+          </ul>
+        </div>
+        <div>
+          <p className="text-white opacity-50">
+            Copyright 2021. All Rights Reserved 
+          </p>
         </div>
       </div>
     </div>
-  </div>
-
-</footer>
-    </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

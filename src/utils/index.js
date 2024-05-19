@@ -1,3 +1,4 @@
+
 export const currencyFormat = (price) => {
     const dollarAmout = new Intl.NumberFormat('en-US', {
         currency: "USD",

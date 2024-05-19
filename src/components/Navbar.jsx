@@ -1,61 +1,62 @@
-
-import { FaBarsStaggered} from "react-icons/fa6"
-import { NavLink } from "react-router-dom";
-
-import NavLinks from "./Navlinks";
-
+import { Link } from 'react-router-dom'
+import logo from '/assets/shared/desktop/logo.svg'
+import cartImg from '/assets/shared/desktop/icon-cart.svg' 
+import Cart from './Cart'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 function Navbar() {
+  const [showCart, setShowCart] = useState(false)
+  const cart  = useSelector((state) => state.cart)
+
+
+  function toogleCart(){
+    setShowCart((prev) => !prev)
+  }
+
   return (
-    <div>
-      <nav className=" bg-[#191919] text-white align-content pb-7">
-    <div className="navbar ">
-      <div className="navbar-start ">
-        <NavLink to="/" className="hidden lg:flex text-3xl font-bold text-white items-center">audiophile</NavLink>
-        {/*DROPDOWN*/}
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <FaBarsStaggered className="h-6 w-6"/>
-            
-          </label>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
-              {/*NAVLINKS*/}
-
-              <NavLinks/> 
-
-            </ul>
+    <div className="pt-8 pb-9 bg-black">
+      <div className='max-container flex items-center justify-between'>
+        <Link to='/'>
+          <img src={logo} alt="" />
+        </Link>
+        <nav>
+          <ul className='flex items-center gap-5'>
+            <li>
+              <Link to="/" className='text-white uppercase font-bold text-xs tracking-widest hover:text-cream-light'>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to='/headphones' className='text-white uppercase font-bold text-xs tracking-widest hover:text-cream-light'>
+                Headphones
+              </Link>
+            </li>
+            <li>
+              <Link to='/speakers' className='text-white uppercase font-bold text-xs tracking-widest hover:text-cream-light'>
+                speakers
+              </Link>
+            </li>
+            <li>
+              <Link to='/earphones' className='text-white uppercase font-bold text-xs tracking-widest hover:text-cream-light'>
+                earphones
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <div className={`relative cursor-pointer indicator ${cart === false && "hidden"}`} onClick={toogleCart}>
+          <img src={cartImg} alt="" />
+          <span className='indicator-item badge badge-primary'>{cart.totalQuantity}</span>
         </div>
+        {showCart && (
+            <>
+              <div className='fixed top-[90px] bottom-0 left-0 right-0 bg-black/50 z-[1]' />
+              <div className='md:w-[377px] absolute xs:left-6 xs:right-6 md:left-auto md:right-10 lg:right-40 top-[120px] z-30'>
+                  <Cart/>
+              </div>
+            </>
+          )}
       </div>
-      <div className="navbar-center hidden lg:flex">
-              {/*NAVLINKS*/}
-              <ul className="menu menu-horizontal">
-              <NavLinks/>
-              </ul>
-
-      </div>
-      <div className="navbar-end ">
-              {/*THEMEICON*/}
-              {/*CART LINK*/}
-              <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-        <div className="indicator">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-          <span className="badge badge-sm indicator-item">8</span>
-        </div>
-      </div>
-      <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-        <div className="card-body">
-          <span className="font-bold text-lg">8 Items</span>
-          <span className="text-info">Subtotal: $999</span>
-          <div className="card-actions">
-            <button className="btn btn-primary btn-block">View cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
-      </div>
-    </div>
-  </nav>
     </div>
   )
 }
