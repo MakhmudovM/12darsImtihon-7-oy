@@ -5,7 +5,7 @@ import { addItemToCart } from "../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { currencyFormat } from "../utils";
 
-import data from "../../data/db.json";
+import data from "../data/db.json";
 
 function SingleProduct() {
   const { slug } = useParams();

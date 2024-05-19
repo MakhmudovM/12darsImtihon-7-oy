@@ -11,7 +11,7 @@ import {
 } from "./page";
 import { ErrorElement } from "./components";
 import { useState, useEffect } from "react";
-import data from ".././data/db.json";
+import data from "./data/db.json";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 import { authReady, login } from "./features/user/userSlice";
